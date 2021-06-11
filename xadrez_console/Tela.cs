@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using tabuleiro;
+using pecas_do_Xadrez;
 
 namespace xadrez_console
 {
@@ -40,6 +38,14 @@ namespace xadrez_console
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("  a b c d e f g h ");
             Console.ResetColor();
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string cardinal = Console.ReadLine();
+            char line = cardinal[0];
+            int colunm = int.Parse(cardinal[1].ToString());
+            return new PosicaoXadrez(line, colunm);
         }
 
     }

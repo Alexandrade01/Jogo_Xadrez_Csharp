@@ -13,24 +13,34 @@ namespace xadrez_console
         static void Main(string[] args)
         {
 
-            PosicaoXadrez posteste = new PosicaoXadrez('b', 3);
+            /*PosicaoXadrez posteste = new PosicaoXadrez('b', 3);
             Console.WriteLine(posteste);
-            Console.WriteLine(posteste.toPosicao());
-
-
-            
-            Tabuleiro tab = new Tabuleiro(8, 8);
+            Console.WriteLine(posteste.toPosicao());*/
             try
             {
-                tab.ColocarPeca(new Torre(Cor.Preta, tab), new Posicao(0, 0));
-        
-                tab.ColocarPeca(new Torre(Cor.Preta, tab), new Posicao(1, 3));
-                tab.ColocarPeca(new Rei(Cor.Preta, tab), new Posicao(2, 4));
-                Tela.ImprimirTabuleiro(tab);
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                while (!partida.finalizarjogada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tab);
+
+                    Console.WriteLine("\n\nOrigem:");
+                    Posicao origin = Tela.LerPosicaoXadrez().PosicaodeMatriz();
+                    Console.WriteLine("Destiny:");
+                    Posicao destiny = Tela.LerPosicaoXadrez().PosicaodeMatriz();
+                    partida.ExecutaroMovimento(origin, destiny);
+                }
+               
             }
             catch(TabuleiroException e)
             {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine(e.Message);
+                Console.ResetColor();
+            }
+            catch(Exception e)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine(e.Message);
                 Console.ResetColor();
             }
@@ -38,3 +48,7 @@ namespace xadrez_console
         }
     }
 }
+
+
+            
+            

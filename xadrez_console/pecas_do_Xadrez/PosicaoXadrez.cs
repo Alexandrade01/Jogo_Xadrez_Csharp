@@ -17,7 +17,7 @@ namespace pecas_do_Xadrez
         /// Indice interno para a localização do tabuleiro
         /// </summary>
         /// <returns></returns>
-        public Posicao toPosicao()
+        public Posicao PosicaodeMatriz()
         {// pelo tabueleiro ser formado de cima para baixo, o numero 8 - a posicao desejada e achamos o indice no tabuleiro
             // na coluna sera a diferença entre os caracteres, a - a = 0, b-a = 1, c-a =2
             //serve para numerar o tabuleiro, ja que esse vai de A-H e 0-7
@@ -27,6 +27,8 @@ namespace pecas_do_Xadrez
         {
             return "" + Colunm + Line;
         }
+
+       
 
 
 
