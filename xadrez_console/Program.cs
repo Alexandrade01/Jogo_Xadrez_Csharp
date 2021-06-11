@@ -12,6 +12,13 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
+
+            PosicaoXadrez posteste = new PosicaoXadrez('b', 3);
+            Console.WriteLine(posteste);
+            Console.WriteLine(posteste.toPosicao());
+
+
+            /*
             Tabuleiro tab = new Tabuleiro(8, 8);
             try
             {
@@ -26,8 +33,8 @@ namespace xadrez_console
                 Console.BackgroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(e.Message);
                 Console.ResetColor();
-            }
-          
+            }*/
+
         }
     }
 }
