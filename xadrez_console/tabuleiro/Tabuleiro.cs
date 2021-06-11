@@ -15,15 +15,37 @@ namespace tabuleiro
             pecas = new Peca[lines, colunms];
         }
 
-        public Peca Peca(int line, int colunm)
+        public Peca Peca(int line, int colunm) 
         {
             return pecas[line, colunm];
         }
-        public void colocarPeca(Peca p, Posicao pos)
-        { // marca a posicao no tabuleiro
+        public Peca Peca(Posicao pos)
+        {
+            return pecas[pos.Line,pos.Column];
+        }
+        public void ColocarPeca(Peca p, Posicao pos)
+        {
+            if (ExistePeca(pos)) { throw new TabuleiroException("Essa posição ja existe uma peça !"); }
+            // marca a posicao no tabuleiro
             pecas[pos.Line, pos.Column] = p;
             // marca a posicao na peça
             p.Posicao = pos;
+        }
+        public bool PosicaoValida(Posicao pos)
+        {
+            if(pos.Line<0 || pos.Line>=Lines || pos.Column<0 || pos.Column >= Colunms) { return false; }
+            return true;
+         
+        }
+        public void ValidarPosicao(Posicao pos)
+        {
+            if(!PosicaoValida(pos)) { throw new TabuleiroException("Posicação Invalida !"); }
+        }
+
+        public bool ExistePeca(Posicao pos)
+        {
+            ValidarPosicao(pos);
+            return Peca(pos) != null;
         }
 
     }
