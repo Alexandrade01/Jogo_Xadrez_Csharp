@@ -11,15 +11,37 @@ namespace xadrez_console
     {
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
-            for(int x = 0; x < tab.Lines; x++)
+            for (int x = 0; x < tab.Lines; x++)
             {
-                for(int y = 0; y < tab.Colunms; y++)
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(8 - x + " ");
+                Console.ResetColor();
+                for (int y = 0; y < tab.Colunms; y++)
                 {
                     if (tab.Peca(x, y) == null) { Console.Write("- "); }
-                    else { Console.Write(tab.Peca(x,y) + " "); }
+
+                    else if (tab.Peca(x, y).Cor == Cor.Preta)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(tab.Peca(x, y) + " ");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+
+                        Console.Write(tab.Peca(x, y) + " ");
+
+                    }
+                  
                 }
                 Console.WriteLine();
             }
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("  a b c d e f g h ");
+            Console.ResetColor();
         }
+
     }
 }
+
