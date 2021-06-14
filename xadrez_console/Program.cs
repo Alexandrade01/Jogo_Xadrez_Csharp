@@ -23,12 +23,19 @@ namespace xadrez_console
                 {
                     Console.Clear();
                     Tela.ImprimirTabuleiro(partida.Tab);
-
-                    Console.WriteLine("\n\nOrigem:");
+                    Console.WriteLine();
+                    Console.Write("\n\nOrigem:");
                     Posicao origin = Tela.LerPosicaoXadrez().PosicaodeMatriz();
-                    Console.WriteLine("Destiny:");
+                    bool[,] movimentosPossiveis = partida.Tab.Peca(origin).movimentosPossiveis();
+                   Console.Clear();
+                    
+                    Tela.ImprimirTabuleiro(partida.Tab,movimentosPossiveis);
+                    Console.WriteLine();
+                    Console.Write("Destiny:");
                     Posicao destiny = Tela.LerPosicaoXadrez().PosicaodeMatriz();
+                    
                     partida.ExecutaroMovimento(origin, destiny);
+                    
                 }
                
             }

@@ -42,7 +42,7 @@ namespace pecas_do_Xadrez
             Tab.ColocarPeca(new Torre(Cor.Branca, Tab), new PosicaoXadrez('d', 2).PosicaodeMatriz());
             Tab.ColocarPeca(new Torre(Cor.Branca, Tab), new PosicaoXadrez('e', 2).PosicaodeMatriz());
             Tab.ColocarPeca(new Torre(Cor.Branca, Tab), new PosicaoXadrez('e', 1).PosicaodeMatriz());
-            Tab.ColocarPeca(new Rei(Cor.Branca, Tab), new PosicaoXadrez('d', 1).PosicaodeMatriz());
+            Tab.ColocarPeca(new Rei(Cor.Branca, Tab), new PosicaoXadrez('f', 1).PosicaodeMatriz());
 
             Tab.ColocarPeca(new Torre(Cor.Preta, Tab), new PosicaoXadrez('c', 8).PosicaodeMatriz());
             Tab.ColocarPeca(new Torre(Cor.Preta, Tab), new PosicaoXadrez('c', 7).PosicaodeMatriz());
