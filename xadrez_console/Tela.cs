@@ -2,14 +2,44 @@
 using System.Threading.Tasks;
 using tabuleiro;
 using pecas_do_Xadrez;
+using System.Collections.Generic;
 
 namespace xadrez_console
 {
     class Tela
     {
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            ImprimirTabuleiro(partida.Tab);
+
+            Console.WriteLine();
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine("Turno: " + partida.turno);
+            Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("Peças Capturadas: ");
+            
+            Console.Write("Brancas : ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("Pretas : ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ResetColor();
+        }
+
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("*");
+            foreach (var x in conjunto) { Console.Write(x + " "); }
+            Console.Write("* \n");
+        }
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
-            
+
             for (int x = 0; x < tab.Lines; x++)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -29,10 +59,10 @@ namespace xadrez_console
 
 
         }
-        public static void ImprimirTabuleiro(Tabuleiro tab,bool[,] possiveisMovimentos)
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] possiveisMovimentos)
         {
-           
-            
+
+
             for (int x = 0; x < tab.Lines; x++)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -63,7 +93,7 @@ namespace xadrez_console
 
         public static void ImprimirPeca(Peca peca)
         {
-           
+
             if (peca == null) { Console.Write("- "); }
             else
             {
@@ -89,6 +119,6 @@ namespace xadrez_console
 
 
 
-                   
+
 
 

@@ -23,10 +23,8 @@ namespace xadrez_console
                     try
                     {
                         Console.Clear();
-                        Tela.ImprimirTabuleiro(partida.Tab);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+                        Tela.ImprimirPartida(partida);
+                   
                         Console.Write("\n\nOrigem:");
                         Posicao origin = Tela.LerPosicaoXadrez().PosicaodeMatriz();
                         partida.ValidarPosicaoOrigem(origin);
