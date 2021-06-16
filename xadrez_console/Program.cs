@@ -16,7 +16,9 @@ namespace xadrez_console
             /*PosicaoXadrez posteste = new PosicaoXadrez('b', 3);
             Console.WriteLine(posteste);
             Console.WriteLine(posteste.toPosicao());*/
-           
+            try
+            {
+
                 PartidaDeXadrez partida = new PartidaDeXadrez();
                 while (!partida.finalizarjogada)
                 {
@@ -24,7 +26,7 @@ namespace xadrez_console
                     {
                         Console.Clear();
                         Tela.ImprimirPartida(partida);
-                   
+
                         Console.Write("\n\nOrigem:");
                         Posicao origin = Tela.LerPosicaoXadrez().PosicaodeMatriz();
                         partida.ValidarPosicaoOrigem(origin);
@@ -36,7 +38,7 @@ namespace xadrez_console
                         Console.WriteLine();
                         Console.Write("Destiny:");
                         Posicao destiny = Tela.LerPosicaoXadrez().PosicaodeMatriz();
-                        partida.ValidarPosicaoDestino(origin,destiny);
+                        partida.ValidarPosicaoDestino(origin, destiny);
 
                         partida.RealizaJogada(origin, destiny);
                     }
@@ -54,15 +56,23 @@ namespace xadrez_console
                         Console.WriteLine(e.Message);
                         Console.ResetColor();
                         Console.ReadKey();
-                    } 
+                    }
 
 
 
                 }
-           
 
 
 
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
+            }
+            catch (TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            Console.ReadLine();
 
 
 
