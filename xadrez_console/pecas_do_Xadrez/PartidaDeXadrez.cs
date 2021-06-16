@@ -14,6 +14,9 @@ namespace pecas_do_Xadrez
         public bool finalizarjogada { get; private set; }
         private HashSet<Peca> HashdePecas;
         private HashSet<Peca> HashdePecasCapturadas;
+        public bool xeque { get; private set; }
+
+
 
 
 
@@ -23,6 +26,7 @@ namespace pecas_do_Xadrez
             turno = 1;
             jogadorAtual = Cor.Branca;
             finalizarjogada = false;
+            xeque = false;
             HashdePecas = new HashSet<Peca>();
             HashdePecasCapturadas = new HashSet<Peca>();
             colocarPecas();
@@ -30,7 +34,7 @@ namespace pecas_do_Xadrez
         }
 
 
-        public void ExecutaroMovimento(Posicao origem, Posicao destino)
+        public Peca ExecutaroMovimento(Posicao origem, Posicao destino)
         {// retira peça do lugar original
             Peca p = Tab.RetirarPeca(origem);
             // aumenta os movimentos
@@ -40,10 +44,30 @@ namespace pecas_do_Xadrez
             // insere a peça do movimento no destino
             Tab.ColocarPeca(p, destino);
             if (pecaCapturada != null) { HashdePecasCapturadas.Add(pecaCapturada); }
+            return pecaCapturada;
+        }
+
+        public void DesfazoMovimento(Posicao origem,Posicao destino,Peca pecacapturada)
+        {
+            Peca p = Tab.RetirarPeca(destino);
+            p.DescrescerQtdeMovimentos();
+            if(pecacapturada != null)
+            {
+                Tab.ColocarPeca(pecacapturada, destino);
+                HashdePecasCapturadas.Remove(pecacapturada);
+                    
+            }
+            Tab.ColocarPeca(p, origem);
+            
         }
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
-            ExecutaroMovimento(origem, destino);
+            Peca pecaCapturada = ExecutaroMovimento(origem, destino);
+            if (Xeque(jogadorAtual)) { DesfazoMovimento(origem, destino, pecaCapturada);
+                throw new TabuleiroException("Você não pode se colocar em cheque!");
+            }
+            if (Xeque(Adversaria(jogadorAtual))) { xeque = true; }
+            else { xeque = false; }
             turno++;
             MudarJogador();
 
@@ -78,9 +102,9 @@ namespace pecas_do_Xadrez
         public HashSet<Peca> PecasCapturadas(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach(Peca x in HashdePecasCapturadas)
+            foreach (Peca x in HashdePecasCapturadas)
             {
-                if(x.Cor == cor)
+                if (x.Cor == cor)
                 {
                     aux.Add(x);
                 }
@@ -101,6 +125,39 @@ namespace pecas_do_Xadrez
             // lista com pecas de jogo exceto as peças capturadas dessa determinada cor
             aux.ExceptWith(PecasCapturadas(cor));
             return aux;
+        }
+
+        private Cor Adversaria(Cor cor)
+        {
+            if (cor == Cor.Branca) { return Cor.Preta; }
+            else return Cor.Branca;
+        }
+        /// <summary>
+        /// Procurar o rei para aplicar o Xeque 
+        /// </summary>
+        /// <param name="cor"></param>
+        /// <returns></returns>
+        private Peca ProcuraRei(Cor cor)
+        {
+            foreach (Peca x in PecasEMJogo(cor))
+            {
+                if (x is Rei) { return x; }
+            }
+            return null;
+        }
+
+        public bool Xeque(Cor cor)
+        {
+            Peca R = ProcuraRei(cor);
+            if(R == null) { throw new TabuleiroException("Não tem Rei da cor " + cor + " no tabuleiro"); }
+            foreach (Peca x in PecasEMJogo(Adversaria(cor)))
+            {// cria a matriz com os movimentos possiveis novamente
+                bool[,] mat = x.movimentosPossiveis();
+                //se a coordenada do rei for true ele retorna
+                if (mat[R.Posicao.Line, R.Posicao.Column]) { return true; }
+               
+            }
+            return false;
         }
         public void ColocarNovaPeca(char colunm, int line, Peca peca)
         {// ira adicionar itens em  uma lista haskset 
