@@ -30,7 +30,7 @@ namespace xadrez_console
                         Console.Write("\n\nOrigem:");
                         Posicao origin = Tela.LerPosicaoXadrez().PosicaodeMatriz();
                         partida.ValidarPosicaoOrigem(origin);
-                        bool[,] movimentosPossiveis = partida.Tab.Peca(origin).movimentosPossiveis();
+                        bool[,] movimentosPossiveis = partida.Tab.Peca(origin).MovimentosPossiveis();
 
                         Console.Clear();
 

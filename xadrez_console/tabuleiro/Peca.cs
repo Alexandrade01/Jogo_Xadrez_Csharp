@@ -24,10 +24,10 @@ namespace tabuleiro
         {
             QtdeMovimentos--;
         }
-        public abstract bool[,] movimentosPossiveis();
+        public abstract bool[,] MovimentosPossiveis();
         public bool ExisteMovimentosPossiveis()
         {
-            bool[,] matrix = movimentosPossiveis();
+            bool[,] matrix = MovimentosPossiveis();
             foreach(var elemento in matrix)
             {
                 if (elemento)
@@ -40,7 +40,7 @@ namespace tabuleiro
         }
         public bool podeMoverPara(Posicao pos)
         {
-            return movimentosPossiveis()[pos.Line, pos.Column];
+            return MovimentosPossiveis()[pos.Line, pos.Column];
         }
 
     }

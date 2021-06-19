@@ -41,13 +41,13 @@ namespace tabuleiro
         }
         public bool PosicaoValida(Posicao pos)
         {
-            if(pos.Line<0 || pos.Line>=Lines || pos.Column<0 || pos.Column >= Colunms) { return true; }
-            return false;
+            if(pos.Line<0 || pos.Line>=Lines || pos.Column<0 || pos.Column >= Colunms) { return false; }
+            return true;
          
         }
         public void ValidarPosicao(Posicao pos)
         {
-            if(PosicaoValida(pos)) { throw new TabuleiroException("Posicação Invalida !"); }
+            if(!PosicaoValida(pos)) { throw new TabuleiroException("Posição Invalida !"); }
         }
 
         public bool ExistePeca(Posicao pos)

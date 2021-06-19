@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pecas_do_Xadrez\Bispo.cs" />
+    <Compile Include="pecas_do_Xadrez\Cavalo.cs" />
+    <Compile Include="pecas_do_Xadrez\Dama.cs" />
     <Compile Include="pecas_do_Xadrez\PartidaDeXadrez.cs" />
+    <Compile Include="pecas_do_Xadrez\Peao.cs" />
     <Compile Include="pecas_do_Xadrez\PosicaoXadrez.cs" />
     <Compile Include="pecas_do_Xadrez\Rei.cs" />
     <Compile Include="pecas_do_Xadrez\Torre.cs" />
